@@ -10,7 +10,7 @@ x-app: &app
   environment:
     REDIS_URL: redis://@redis:6379/1
     DATABASE_URL: postgres://postgres:postgres@postgres:5432/
-    WEBPACKER_DEV_SERVER_HOST: webpacker
+    RAILS_MASTER_KEY: a4f54b74e0209a68b8b748b099b1e298
   entrypoint: ./bin/docker/entrypoints/wait-for-web.sh
   volumes:
     - .:/usr/src/app:cached

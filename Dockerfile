@@ -12,6 +12,7 @@ RUN apk --no-cache add --virtual build-dependencies \
   postgresql-dev \
   # JavaScript
   nodejs \
+  npm \
   # FFI Bindings in ruby (Run C Commands)
   libffi-dev \
   # Fixes watch file issues with things like HMR
@@ -81,6 +82,8 @@ WORKDIR /usr/src/app
 ENV PATH /usr/src/app/bin:$PATH
 
 # Add a script to be executed every time the container starts.
+ARG wait_for_services
+ENV WAIT_FOR_SERVICES=$wait_for_services
 COPY bin/docker/entrypoints/* /usr/bin/
 RUN chmod +x /usr/bin/wait-for-postgres.sh
 RUN chmod +x /usr/bin/wait-for-web.sh
@@ -109,14 +112,14 @@ RUN bundle config set deployment 'true' \
 
 COPY package.json /usr/src/app
 
-# Install Yarn Libraries
-RUN yarn install --frozen-lockfile --check-files
+# Install NPM Libraries
+RUN npm install --production
 
 # Chown files so non are root.
 COPY --chown=appuser:appgroup . /usr/src/app
 
-# Precompile the assets, yarn relay & bootsnap
-RUN RAILS_SERVE_STATIC_FILES=enabled \
+# Precompile the assets
+RUN RAILS_SERVE_STATIC_FILES=true \
   SECRET_KEY_BASE=secret-key-base \
-  bundle exec rake assets:precompile \
-  && bundle exec bootsnap precompile --gemfile app/ lib/
+  bundle exec rake assets:precompile
+# && bundle exec bootsnap precompile --gemfile app/ lib/

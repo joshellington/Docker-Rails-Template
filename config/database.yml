@@ -82,3 +82,7 @@ test:
 production:
   <<: *default
   database: seven_app_production
+  host: <%= ENV['RDS_HOSTNAME'] %>
+  username: <%= ENV['RDS_USERNAME'] %>
+  password: <%= ENV['RDS_PASSWORD'] %>
+  port: <%= ENV['RDS_PORT'] %>
