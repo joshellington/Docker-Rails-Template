@@ -5,12 +5,17 @@
     <div class="results-grid">
       <% @results['hits'].each do |result| %>
         <div class="result">
-          <h4><%= result['school'].upcase %></h4>
           <% if result['image'] %>
-            <%= image_tag result['image'], width: 315 %>
+            <div class="image" style="background-image:url(<%= result['image'] %>);"></div>
+          <% else %>
+            <div class="image"></div>
           <% end %>
-          <h3><%= result['name'] %></h3>
-          <%= link_to "Details", result['url'], target: "_blank" %>
+          
+          <div class="content">
+            <h4><%= result['name'] %></h4>
+            <p><%= result['school'].upcase %></p>
+            <%= link_to "Details", result['url'], target: "_blank" %>
+          </div>
         </div>
       <% end %>
 

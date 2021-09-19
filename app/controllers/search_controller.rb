@@ -3,7 +3,7 @@ class SearchController < ApplicationController
     client = MeiliSearch::Client.new(ENV['MEILI_URL'])
     index = client.index('orgs')
     default_search_options = {
-      limit: 30
+      limit: 32
     }
     search_options = if ["osu", "ut"].include? params[:school]
       {filter: ["school = #{params[:school].downcase}"]}

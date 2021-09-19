@@ -19,13 +19,30 @@ body {
 
   .result {
     width: 20%;
+    min-height: 150px;
     border: 2px solid $black;
-    padding: 30px;
     border-radius: 6px;
     margin-bottom: 30px;
+    overflow: hidden;
+
+    .image {
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #eee;
+      height: 100px;
+    }
+
+    .content {
+      padding: 15px;
+    }
+
+    h4 {
+      margin: 0;
+    }
 
     img {
-      max-width: 100%;
+      width: 100%;
     }
 
     em {

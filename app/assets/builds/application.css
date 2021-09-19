@@ -13,13 +13,27 @@ body {
 }
 .results-grid .result {
   width: 20%;
+  min-height: 150px;
   border: 2px solid #000;
-  padding: 30px;
   border-radius: 6px;
   margin-bottom: 30px;
+  overflow: hidden;
+}
+.results-grid .result .image {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #eee;
+  height: 100px;
+}
+.results-grid .result .content {
+  padding: 15px;
+}
+.results-grid .result h4 {
+  margin: 0;
 }
 .results-grid .result img {
-  max-width: 100%;
+  width: 100%;
 }
 .results-grid .result em {
   color: blue;
