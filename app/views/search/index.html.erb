@@ -4,11 +4,11 @@
 
   <div>
     <label for="osu">
-      <input type="radio" id="osu" value="osu" name="school" checked data-action="input->search#update"> OSU
+      <input type="radio" id="osu" value="osu" name="school" <% if params[:school] === "osu"%>checked<% end %> data-action="input->search#update"> OSU
     </label>
 
     <label for="ut">
-      <input type="radio" id="ut" value="ut" name="school" data-action="input->search#update"> UT
+      <input type="radio" id="ut" value="ut" name="school" <% if params[:school] === "ut"%>checked<% end %> data-action="input->search#update"> UT
     </label>
   </div>
 <% end %>
