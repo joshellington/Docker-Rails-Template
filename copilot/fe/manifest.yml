@@ -13,6 +13,7 @@ http:
   path: '/'
   # You can specify a custom health check path. The default is "/".
   # healthcheck: '/'
+  deregistration_delay: 10s
 
 # Configuration for your containers and service.
 image:

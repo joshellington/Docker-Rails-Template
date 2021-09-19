@@ -7,6 +7,9 @@ export default class extends Controller {
 
   connect () {
     console.log("connected");
+    if (this.term.length > 2) {
+      this.request();
+    }
   }
 
   keyup() {
@@ -14,7 +17,7 @@ export default class extends Controller {
   }
 
   request() {
-    if (this.term.length > 2) {
+    if (this.term.length > 2 || this.term === "") {
       this.addQueryString();
       Rails.fire(this.formTarget, 'submit');
     }

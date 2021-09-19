@@ -4,22 +4,25 @@
 
     <div class="results-grid">
       <% @results['hits'].each do |result| %>
-        <div class="result">
+        <a class="result" href="<%= result['url'] %>" target="_blank">
           <% if result['image'] %>
-            <div class="image" style="background-image:url(<%= result['image'] %>);"></div>
+            <div class="image has-image" style="background-image:url(<%= result['image'] %>);"></div>
           <% else %>
             <div class="image"></div>
           <% end %>
-          
+
           <div class="content">
-            <h4><%= result['name'] %></h4>
-            <p><%= result['school'].upcase %></p>
-            <%= link_to "Details", result['url'], target: "_blank" %>
+            <h3><%= sanitize result['name'] %></h3>
+            <p><%= result['categories'][0] %></p>
+
+            <div class="meta">
+              <p><%= result['status'].upcase.split(" - ")[0] %></p>
+            </div>
           </div>
-        </div>
+        </a>
       <% end %>
 
-      <% if @results.empty? %>
+      <% if @results['hits'].empty? %>
         <p>No results.</p>
       <% end %>
     </div>
