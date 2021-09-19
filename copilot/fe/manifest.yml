@@ -23,7 +23,6 @@ image:
     target: production
     args:
       wait_for_services: false
-
   # Port exposed through your container to route traffic to it.
   port: 3000
 

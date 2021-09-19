@@ -115,5 +115,6 @@ Rails.application.configure do
 
   config.lograge.enabled = true
 
-  config.hosts << "d1hxhxtmy19k6c.cloudfront.net"
+  # config.hosts << "d1hxhxtmy19k6c.cloudfront.net"
+  config.hosts.clear
 end
