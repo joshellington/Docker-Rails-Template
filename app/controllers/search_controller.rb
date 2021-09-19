@@ -1,5 +1,10 @@
 class SearchController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def index
+  end
+
+  def search
     client = MeiliSearch::Client.new(ENV['MEILI_URL'])
     index = client.index('orgs')
     default_search_options = {
@@ -18,12 +23,15 @@ class SearchController < ApplicationController
     end
     
     respond_to do |format|
-      format.html
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.replace(
-          'results',
-          partial: 'search/results'
-        )
+      if !@results
+        format.html { render :index, status: :unprocessable_entity}
+      else
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            'results',
+            partial: 'search/results'
+          )
+        end
       end
     end
   end

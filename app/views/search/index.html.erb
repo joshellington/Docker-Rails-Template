@@ -4,7 +4,7 @@
 
   <div>
     <label for="osu">
-      <input type="radio" id="osu" value="osu" name="school" <% if params[:school] === "osu"%>checked<% end %> data-action="input->search#update"> OSU
+      <input type="radio" id="osu" value="osu" name="school" <% if params[:school] === "osu" or !params[:school] %>checked<% end %> data-action="input->search#update"> OSU
     </label>
 
     <label for="ut">

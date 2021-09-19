@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   # Almost every application defines a route for the root path ("/") at the top of this file.
 
   get 'search', to: 'search#index'
-  post 'search', to: 'search#index'
+  post 'search', to: 'search#search'
 end

@@ -14,9 +14,10 @@ export default class extends Controller {
   }
 
   request() {
-    // console.log(this.formTarget);
-    this.addQueryString();
-    Rails.fire(this.formTarget, 'submit');
+    if (this.term.length > 2) {
+      this.addQueryString();
+      Rails.fire(this.formTarget, 'submit');
+    }
   }
 
   update() {
