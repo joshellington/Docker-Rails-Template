@@ -1,3 +1,3 @@
 if Rails.env.production?
-  ENV['MEILI_URL'] = "http://meili.#{ENV['COPILOT_SERVICE_DISCOVERY_ENDPOINT']}"
+  ENV['MEILI_URL'] = "http://meili.#{ENV['COPILOT_SERVICE_DISCOVERY_ENDPOINT']}/meili/"
 end
