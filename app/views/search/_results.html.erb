@@ -1,0 +1,22 @@
+<div id="results">
+  <% if @results %>
+    <p><%= @results['hits'].count %> results (<%= @results['processingTimeMs'] %>ms)</p>
+
+    <div class="results-grid">
+      <% @results['hits'].each do |result| %>
+        <div class="result">
+          <h4><%= result['school'].upcase %></h4>
+          <% if result['image'] %>
+            <%= image_tag result['image'], width: 315 %>
+          <% end %>
+          <h3><%= result['name'] %></h3>
+          <%= link_to "Details", result['url'], target: "_blank" %>
+        </div>
+      <% end %>
+
+      <% if @results.empty? %>
+        <p>No results.</p>
+      <% end %>
+    </div>
+  <% end %>
+</div>

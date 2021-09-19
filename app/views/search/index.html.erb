@@ -1,0 +1,16 @@
+<%= form_with url: search_path, data: { controller: "search", "search-target" => "form" } do |form| %>
+  <%= form.text_field 'q', placeholder: 'Enter search terms...', data: { "search-target" => "term", action: "keyup->search#request" }, value: params[:q] %>
+  <%= form.submit 'Search', hidden: true, data: { disable_with: false, action: "click->search#addQueryString" } %>
+
+  <div>
+    <label for="osu">
+      <input type="radio" id="osu" value="osu" name="school" checked data-action="input->search#update"> OSU
+    </label>
+
+    <label for="ut">
+      <input type="radio" id="ut" value="ut" name="school" data-action="input->search#update"> UT
+    </label>
+  </div>
+<% end %>
+
+<%= render partial: "search/results" %>

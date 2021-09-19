@@ -45,6 +45,7 @@ environments:
   test:
     variables:
       WAIT_FOR_SERVICES: false
+      MEILI_URL: http://p-sev-publi-1xby2pd65puxc-215452733.us-west-2.elb.amazonaws.com/meili/
     secrets:
       RDS_HOSTNAME: /copilot/p-seven/test/secrets/RDS_HOSTNAME
       RDS_USERNAME: /copilot/p-seven/test/secrets/RDS_USERNAME
