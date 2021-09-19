@@ -27,8 +27,8 @@ image:
   # Port exposed through your container to route traffic to it.
   port: 3000
 
-cpu: 512       # Number of CPU units for the task.
-memory: 1024    # Amount of memory in MiB used by the task.
+cpu: 256       # Number of CPU units for the task.
+memory: 512    # Amount of memory in MiB used by the task.
 count: 1       # Number of tasks that should be running in your service.
 exec: true     # Enable running commands in your container.
 
@@ -45,7 +45,6 @@ environments:
   test:
     variables:
       WAIT_FOR_SERVICES: false
-      MEILI_URL: http://p-sev-publi-1xby2pd65puxc-215452733.us-west-2.elb.amazonaws.com/meili/
     secrets:
       RDS_HOSTNAME: /copilot/p-seven/test/secrets/RDS_HOSTNAME
       RDS_USERNAME: /copilot/p-seven/test/secrets/RDS_USERNAME
