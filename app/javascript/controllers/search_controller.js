@@ -7,19 +7,21 @@ export default class extends Controller {
 
   connect () {
     console.log("connected");
+    this.termTarget.focus();
+
     if (this.term.length > 2) {
       this.request();
     }
   }
 
   keyup() {
-    _.debounce(this.request, 100);
+    _.debounce(this.request, 250);
   }
 
   request() {
     if (this.term.length > 2 || this.term === "") {
       this.addQueryString();
-      Rails.fire(this.formTarget, 'submit');
+      Rails.fire(this.formTarget, "submit");
     }
   }
 
@@ -30,7 +32,6 @@ export default class extends Controller {
   addQueryString() {
     const formData = new FormData(this.formTarget);
     const formProps = Object.fromEntries(formData);
-    // console.log(formData, formProps);
 
     if (this.term === "") {
       const cleanURL = location.protocol + "//" + location.host + location.pathname;

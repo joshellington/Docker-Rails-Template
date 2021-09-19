@@ -1,6 +1,6 @@
 <div id="results">
   <% if @results %>
-    <p><%= @results['hits'].count %> results (<%= @results['processingTimeMs'] %>ms)</p>
+    <p><%= @results['nbHits'] %> results &mdash; <%= @results['processingTimeMs'] %>ms</p>
 
     <div class="results-grid">
       <% @results['hits'].each do |result| %>

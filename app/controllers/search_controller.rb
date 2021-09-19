@@ -21,7 +21,8 @@ class SearchController < ApplicationController
     else
       nil
     end
-    
+
+    # puts @results.inspect
     respond_to do |format|
       if !@results
         format.html { render :index, status: :unprocessable_entity}

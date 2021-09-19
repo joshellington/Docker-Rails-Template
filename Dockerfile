@@ -12,7 +12,7 @@ RUN apk --no-cache add --virtual build-dependencies \
   postgresql-dev \
   # JavaScript
   nodejs \
-  npm \
+  yarn \
   # FFI Bindings in ruby (Run C Commands)
   libffi-dev \
   # Fixes watch file issues with things like HMR
@@ -41,6 +41,7 @@ RUN apk --no-cache add \
   git \
   # VIM is a handy editor for editing credentials
   vim \
+  nano \
   # Allows for mimemagic gem to be installed
   shared-mime-info
 
@@ -52,7 +53,8 @@ FROM builder AS development
 
 # Set common ENVs
 ENV BOOTSNAP_CACHE_DIR /usr/src/bootsnap
-ENV EDITOR vim
+ENV YARN_CACHE_FOLDER /usr/src/yarn
+ENV EDITOR nano
 ENV LANG en_US.UTF-8
 ENV BUNDLE_PATH /usr/local/bundle
 ENV RAILS_LOG_TO_STDOUT enabled
@@ -73,10 +75,12 @@ RUN bundle config set jobs $(nproc)
 RUN mkdir -p /usr/src/app \
   && mkdir -p /usr/src/app/node_modules \
   && mkdir -p /usr/src/app/tmp/cache \
+  && mkdir -p $YARN_CACHE_FOLDER \
   && mkdir -p $BOOTSNAP_CACHE_DIR \
   && chown -R appuser:appgroup /usr/src/app \
   && chown -R appuser:appgroup $BUNDLE_PATH \
-  && chown -R appuser:appgroup $BOOTSNAP_CACHE_DIR
+  && chown -R appuser:appgroup $BOOTSNAP_CACHE_DIR \
+  && chown -R appuser:appgroup $YARN_CACHE_FOLDER
 WORKDIR /usr/src/app
 
 ENV PATH /usr/src/app/bin:$PATH
@@ -111,9 +115,10 @@ RUN bundle config set deployment 'true' \
   && bundle check || bundle install --jobs=$(nproc)
 
 COPY package.json /usr/src/app
+COPY yarn.lock /usr/src/app
 
-# Install NPM Libraries
-RUN npm install --production
+# Install Yarn Libraries
+RUN yarn install --frozen-lockfile --check-files
 
 # Chown files so non are root.
 COPY --chown=appuser:appgroup . /usr/src/app
@@ -121,5 +126,5 @@ COPY --chown=appuser:appgroup . /usr/src/app
 # Precompile the assets
 RUN RAILS_SERVE_STATIC_FILES=true \
   SECRET_KEY_BASE=secret-key-base \
-  bundle exec rake assets:precompile
-# && bundle exec bootsnap precompile --gemfile app/ lib/
+  bundle exec rake assets:precompile \
+  && bundle exec bootsnap precompile --gemfile app/ lib/

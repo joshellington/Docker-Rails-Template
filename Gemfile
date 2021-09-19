@@ -14,7 +14,7 @@ gem "puma", "~> 5.0"
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 # gem "importmap-rails", ">= 0.3.4"
-gem "importmap-rails", "0.5.3"
+# gem "importmap-rails", "0.5.3"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails", ">= 0.7.11"
@@ -24,6 +24,9 @@ gem "stimulus-rails", ">= 0.4.0"
 
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem "cssbundling-rails", ">= 0.1.0"
+
+# Bundle and process JS [https://github.com/rails/jsbundling-rails]
+gem "jsbundling-rails", ">= 0.1.6"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder", "~> 2.7"
